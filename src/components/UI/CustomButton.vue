@@ -25,4 +25,12 @@ export default {
 .btn:hover {
     background-color: #005bfe;
 }
+
+.btn_danger {
+    background-color: rgb(233, 28, 28);
+}
+
+.btn_danger:hover {
+    background-color: rgb(203, 16, 16);
+}
 </style>

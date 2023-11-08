@@ -6,22 +6,26 @@
     <modal-win v-model:show="modalVisible">
       <UserForm @create="createUser" :id="users.length + 1"></UserForm>
     </modal-win>
-    <UserList :userList="users" @edit:user="editUser" />
+    <UserList :userList="users" @edit:user="editUser" @delete:user="deleteUser" />
   </div>
 </template>
 
 <script>
+// Импортируем компонент отвечающий за форму добавления нового пользователя 
 import UserForm from '@/components/UserForm.vue';
+// Импортируем компонент отвечающий за за отрисовку списка пользователей
 import UserList from '@/components/UserList.vue';
 
 export default {
+  // Регистрируем компоненты в приложении
   components: {
     UserForm, UserList
   },
   data() {
     return {
+      // Инициализируем переменную отвечающую за видимость моадльного окна
       modalVisible: false,
-      //
+      // Инициализурем массив хранящий в себе список пользователей
       users: [
         {
           id: 1,
@@ -87,18 +91,29 @@ export default {
     }
   },
   methods: {
+    // Объявляем метод отображающий моадльное окно
     showModal() {
       this.modalVisible = true;
     },
+    // Объявляем метод принимающий в качестве атрибута оъект с новым пользователем
     createUser(user) {
+      // Добавляем в список нового пользователя
       this.users.push(user);
+      // Закрываем модальное окно
       this.modalVisible = false;
     },
+    // Объявляем метод принимающий в качестве атрибута объект с изменённым пользователем
     editUser(editedUser) {
+      // Ищем в массиве хранящем список пользователей индекс изменённого элемента
       let editingUserIndex = this.users.findIndex(user => user.id === editedUser.id);
+      // В случае если такой элемент есть, заменяем его на изменённый
       if (editingUserIndex !== -1) {
         this.users[editingUserIndex] = structuredClone(editedUser);
       }
+    },
+    deleteUser(delitingUserId) {
+      let deletingUserIndex = this.users.findIndex(user => user.id === delitingUserId);
+      this.users.splice(deletingUserIndex, 1)
     }
   },
 }
