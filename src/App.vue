@@ -111,8 +111,11 @@ export default {
         this.users[editingUserIndex] = structuredClone(editedUser);
       }
     },
+    // Объявляем метод принимающий в качестве атрибута id удаляемого пользователя
     deleteUser(delitingUserId) {
+      // Ищем в массиве хранящем список пользователей индекс удаляемого элемента
       let deletingUserIndex = this.users.findIndex(user => user.id === delitingUserId);
+      // Удаляем нужный элемент из массива
       this.users.splice(deletingUserIndex, 1)
     }
   },
