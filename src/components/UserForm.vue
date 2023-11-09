@@ -27,6 +27,7 @@
 export default {
     data() {
         return {
+            // Обявляем рактивные переменные которые будут хранить в себе информацию о новом пользователе получнную из инпутов
             name: '',
             lastName: '',
             experience: {
@@ -41,6 +42,8 @@ export default {
             }
         }
     },
+    // Объявляем информацию о входных параметрах
+    // Попробовать перенести добавление id в основной компонент
     props: {
         id: {
             type: Number,
@@ -48,7 +51,9 @@ export default {
         }
     },
     methods: {
+        // Объявляем метод создающий нового пользователя
         createUser() {
+            // Задаём полям пользователя значени полученные из реактивных переменных
             let user = {
                 id: this.id,
                 name: this.name,
@@ -64,7 +69,10 @@ export default {
                     apartment: this.address.apartment
                 }
             };
+            // Создаём событие 'create' и передаём вмсте с его всплытием новго пользователя
+            // Заменить user на newUser
             this.$emit('create', user);
+            // Отчищаем реактивные переменные
             this.name = '';
             this.lastName = '';
             this.experience.years = '';
