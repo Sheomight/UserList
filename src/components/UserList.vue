@@ -19,23 +19,30 @@
 </template>
 
 <script>
+// Импортируем компонент отвечающий за отображение пользователя
 import UserItem from '@/components/UserItem.vue';
 
 export default {
+    // Объявляем информацию о входных параметрах
     props: {
         userList: {
             type: Array,
             required: true
         }
     },
+    // Подключаем компонент
     components: {
         UserItem
     },
     methods: {
+        // Обявляем метод принимающий в качестве аргумента изменённого пользователя
         editUser(editedUser) {
+            // Создаём событие 'edit:user' и передаём вмсте с его всплытием изменённого пользователя
             this.$emit('edit:user', editedUser)
         },
+        // Обявляем метод принимающий в качестве аргумента id удаляемого пользователя
         deleteUser(delitingUserId) {
+            // Создаём событие 'delete:user' и передаём вмсте с его всплытием id удаляемого пользователя
             this.$emit('delete:user', delitingUserId);
         }
     }
