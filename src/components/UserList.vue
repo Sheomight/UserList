@@ -12,7 +12,7 @@
         </thead>
         <tbody>
             <template v-for="user in userList" :key="user.id">
-                <UserItem :user="user" @edit:user="editUser" @delete:user="deleteUser" />
+                <UserItem :user="user" @edit="editUser" @delete="deleteUser" />
             </template>
         </tbody>
     </table>
@@ -37,13 +37,13 @@ export default {
     methods: {
         // Обявляем метод принимающий в качестве аргумента изменённого пользователя
         editUser(editedUser) {
-            // Создаём событие 'edit:user' и передаём вмсте с его всплытием изменённого пользователя
-            this.$emit('edit:user', editedUser)
+            // Создаём событие 'edit' и передаём вмсте с его всплытием изменённого пользователя
+            this.$emit('edit', editedUser)
         },
         // Обявляем метод принимающий в качестве аргумента id удаляемого пользователя
         deleteUser(delitingUserId) {
-            // Создаём событие 'delete:user' и передаём вмсте с его всплытием id удаляемого пользователя
-            this.$emit('delete:user', delitingUserId);
+            // Создаём событие 'delete' и передаём вмсте с его всплытием id удаляемого пользователя
+            this.$emit('delete', delitingUserId);
         }
     }
 }

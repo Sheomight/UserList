@@ -6,12 +6,12 @@
     <modal-win v-model:show="modalVisible">
       <UserForm @create="createUser" :id="users.length + 1"></UserForm>
     </modal-win>
-    <UserList :userList="users" @edit:user="editUser" @delete:user="deleteUser" />
+    <UserList :userList="users" @edit="editUser" @delete="deleteUser" />
   </div>
 </template>
 
 <script>
-// Импортируем компонент отвечающий за форму добавления нового пользователя 
+// Импортируем компонент формы добавления нового пользователя 
 import UserForm from '@/components/UserForm.vue';
 // Импортируем компонент отвечающий за за отрисовку списка пользователей
 import UserList from '@/components/UserList.vue';
@@ -23,9 +23,9 @@ export default {
   },
   data() {
     return {
-      // Инициализируем переменную отвечающую за видимость моадльного окна
+      // Инициализируем реактивную переменную отвечающую за видимость модального окна
       modalVisible: false,
-      // Инициализурем массив хранящий в себе список пользователей
+      // Инициализурем реактивный массив хранящий в себе список пользователей
       users: [
         {
           id: 1,
@@ -96,9 +96,9 @@ export default {
       this.modalVisible = true;
     },
     // Объявляем метод принимающий в качестве атрибута оъект с новым пользователем
-    createUser(user) {
+    createUser(newUser) {
       // Добавляем в список нового пользователя
-      this.users.push(user);
+      this.users.push(newUser);
       // Закрываем модальное окно
       this.modalVisible = false;
     },

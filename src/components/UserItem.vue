@@ -68,14 +68,14 @@ export default {
         editUser() {
             this.editedUser.experience.years = +this.editedUser.experience.years;
             this.editedUser.experience.month = +this.editedUser.experience.month;
-            this.$emit('edit:user', this.editedUser);
+            this.$emit('edit', this.editedUser);
             this.isEditing = false;
         },
         stopEditing() {
             this.isEditing = false;
         },
         deleteUser() {
-            this.$emit('delete:user', this.user.id);
+            this.$emit('delete', this.user.id);
         }
     }
 }
