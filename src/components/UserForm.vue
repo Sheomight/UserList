@@ -1,7 +1,9 @@
 <template>
+    <!-- Предотвращаем принудительное обновление страницы при отправке формы, а так же всплытие события клика -->
     <form class="modal__content" @click.stop @submit.prevent>
         <h2 class="modal__title">Add user info</h2>
         <div class="modal__fields">
+            <!-- Реактивно связываем инпуты с переменными хранящими информацию о новом пользователе -->
             <custom-input class="modal__input" placeholder="Name" v-model="name"></custom-input>
             <custom-input class="modal__input" placeholder="Last name" v-model="lastName"></custom-input>
             <fieldset class="modal__group">
@@ -19,6 +21,7 @@
                 <custom-input class="modal__input" placeholder="Apartment" v-model="address.apartment"></custom-input>
             </fieldset>
         </div>
+        <!-- Вызываем метож создания нового пользователя при клике на кнопку -->
         <custom-button class="modal__btn" @click="createUser">Add user</custom-button>
     </form>
 </template>
