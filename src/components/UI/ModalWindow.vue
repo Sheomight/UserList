@@ -1,4 +1,6 @@
 <template>
+    <!-- Элемент будед отображаться только если show в значении true 
+         При клике на модальное окно вызывается метож скрывающий его-->
     <div class="modal" v-if="show" @click="hideModal()">
         <slot></slot>
     </div>
@@ -6,14 +8,18 @@
 
 <script>
 export default {
+    // Задаём имя компоненту
     name: 'modal-win',
+    // Объявляем информацию о входных параметрах
     props: {
         show: {
             type: Boolean,
             defaul: false
         }
     },
+    emits: ['update:show'],
     methods: {
+        // Объявляем метож обновляющмй значение show в родительском компоненте на false
         hideModal() {
             this.$emit('update:show', false)
         }

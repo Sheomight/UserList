@@ -1,15 +1,22 @@
 <template>
+    <!-- Связываем значение инпута с modelValue
+    Подписываем на событие input и при вводе текста вызываем метож updateInput -->
     <input class="input" :value="modelValue" @input="updateInput">
 </template>
 
 <script>
 export default {
+    // Задаём имя компоненту
     name: 'custom-input',
+    // Объявляем информацию о входных параметрах
     props: {
         modelValue: [String, Number]
     },
+    emits: ['update:model-value'],
     methods: {
+        // Объявляем метож принимающий в качестве параметра событие
         updateInput(event) {
+            // Регистрируем событие update:modelValue и передаём с его всплытием значение внутри инпута
             this.$emit('update:modelValue', event.target.value)
         }
     }

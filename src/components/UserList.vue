@@ -33,6 +33,7 @@ export default {
             required: true
         }
     },
+    emits: ['edit', 'delete'],
     // Подключаем компонент
     components: {
         UserItem

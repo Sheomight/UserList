@@ -37,7 +37,7 @@ export default {
                 years: '',
                 month: ''
             },
-            age: null,
+            age: '',
             address: {
                 city: '',
                 street: '',
@@ -52,6 +52,7 @@ export default {
             required: true
         }
     },
+    emits: ['create'],
     methods: {
         // Объявляем метод создающий нового пользователя
         createUser() {
@@ -78,7 +79,7 @@ export default {
             this.lastName = '';
             this.experience.years = '';
             this.experience.month = '';
-            this.age = null;
+            this.age = '';
             this.address.city = '';
             this.address.street = '';
             this.address.apartment = '';

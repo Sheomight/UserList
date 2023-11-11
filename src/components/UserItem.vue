@@ -4,8 +4,8 @@
         <td>{{ user.name }}</td>
         <td>{{ user.lastName }}</td>
         <td>
-            <span v-if="user.experience.years">{{ user.experience.years }} years</span> <span
-                v-if="user.experience.month">{{ user.experience.month }} month</span>
+            <span v-if="Number(user.experience.years)">{{ (user.experience.years) }} years</span> <span
+                v-if="Number(user.experience.month)">{{ user.experience.month }} month</span>
         </td>
         <td>{{ user.age }}</td>
         <td>{{ user.address.city }}, {{ user.address.street }}, {{ user.address.apartment }}</td>
@@ -35,7 +35,7 @@
             <!-- Вешаем обработчик события на клик по кнопке, запускающий метод сохранения изменений -->
             <custom-button class="userlist__btn" @click="editUser(user)">OK</custom-button>
             <!-- Вешаем обработчик события на клик по кнопке, запускающий метод прекращения редактирования -->
-            <custom-button class="userlist__btn btn_danger" @click="stopEditing">X</custom-button>
+            <custom-button class="userlist__btn btn_danger" @click="chageIsEditing">X</custom-button>
         </td>
     </tr>
 </template>
@@ -49,6 +49,7 @@ export default {
             required: true
         }
     },
+    emits: ['edit', 'delete'],
     data() {
         return {
             // Инициализируем реактивный объект который будет хранить в себе изменённого пользователя
@@ -77,22 +78,18 @@ export default {
             // Копируем все данные пользователя в объект который сохранит измнения
             this.editedUser = structuredClone(this.user)
             // Меняем статус редактирования
-            this.isEditing = true;
+            this.chageIsEditing();
         },
         // Обхявляем метод сохраняющий изменения пользователя
         editUser() {
-            // !!! поискать как можно заменить эти преобразования
-            this.editedUser.experience.years = +this.editedUser.experience.years;
-            this.editedUser.experience.month = +this.editedUser.experience.month;
             // Регестрируем событие edit и передаём с его всплытием изменённого пользователя
             this.$emit('edit', this.editedUser);
             // Меняем статус редактирования
-            this.isEditing = false;
+            this.chageIsEditing();
         },
-        // Объявляем метод прекращающий редактирование
-        // Попробовать переделать в изменяющий состояние и использовать везде
-        stopEditing() {
-            this.isEditing = false;
+        // Объявляем метод изменяющий статус редактирования
+        chageIsEditing() {
+            this.isEditing = !this.isEditing;
         },
         // Объявляем метод удаления пользователя
         deleteUser() {
@@ -109,11 +106,18 @@ export default {
 }
 
 .userlist__action {
-    text-align: center;
+    text-align: left;
 }
 
 .userlist__btn {
     min-width: 40px;
     height: 40px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.userlist__btn:last-child {
+    margin-right: 0;
+    margin-bottom: 0;
 }
 </style>
