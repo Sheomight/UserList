@@ -7,7 +7,6 @@
 <script>
 export default {
     name: 'custom-button',
-    emits: ['click'],
 }
 </script>
 
